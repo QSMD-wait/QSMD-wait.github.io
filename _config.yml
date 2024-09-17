@@ -8,7 +8,7 @@
 
 # Basic Site Settings
 locale                   : "en-US"
-title                    : "ALT Beta" # 标题
+title                    : "青色漫地_wait" # 标题
 title_separator          : "-"
 name                     : &name "青色漫地_wait"
 description              : &description "个人简介"
