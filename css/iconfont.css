@@ -215,3 +215,7 @@
   font-family: "iconfont";
   content: "\e63a";
 }
+.icon-taichi:before {
+  font-family: "iconfont";
+  content: "\e62b";
+}

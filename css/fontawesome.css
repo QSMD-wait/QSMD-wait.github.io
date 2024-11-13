@@ -14,7 +14,7 @@
   content: "\f017";
 }
 .article-category-link:before {
-  font-family: var(--var(--font-icon));
+  font-family: var(--font-icon);
   content: "\f02e";
 }
 .article-tag-list-link:before {
@@ -211,4 +211,8 @@
 .icon-creative-commons:before {
   font-family: var(--font-icon);
   content: "\f25e";
+}
+.icon-taichi:before {
+  font-family: var(--font-icon);
+  content: "\f6ad";
 }
