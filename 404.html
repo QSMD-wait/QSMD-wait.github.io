@@ -1,5 +1,4 @@
-
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN"  >
 <head>
   <meta charset="utf-8">
@@ -18,7 +17,7 @@
     青色漫地_wait
   </title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media&#x3D;&#39;all&#39;">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media=&#39;all&#39;">
   
     <link rel="preload" href="//at.alicdn.com/t/c/font_4552607_tq6stt6tcg.woff2" as="font" type="font/woff2" crossorigin="anonymous">
   
@@ -289,7 +288,94 @@
 
 <!-- hexo injector body_end start -->
 <script src="/js/insert_highlight.js" data-pjax></script>
-<!-- hexo injector body_end end --></body>
+<!-- hexo injector body_end end -->
+
+<!-- ===================== 新增的 Toast 提示 ===================== -->
+<script>
+  (function() {
+    // 等待 DOM 就绪
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+
+    function init() {
+      // 延迟 3 秒显示 toast
+      setTimeout(function() {
+        // 创建 toast 容器
+        var toast = document.createElement('div');
+        toast.id = 'custom-toast';
+        // 样式：底部居中，半透明毛玻璃效果，与主题风格协调
+        toast.style.cssText = `
+          position: fixed;
+          bottom: 30px;
+          left: 50%;
+          transform: translateX(-50%);
+          background: rgba(0, 0, 0, 0.75);
+          backdrop-filter: blur(4px);
+          color: #fff;
+          padding: 14px 28px;
+          border-radius: 40px;
+          font-size: 16px;
+          font-family: 'Mulish', 'Noto Serif SC', sans-serif;
+          cursor: pointer;
+          z-index: 99999;
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+          border: 1px solid rgba(255, 255, 255, 0.15);
+          letter-spacing: 0.5px;
+          transition: opacity 0.5s ease, transform 0.5s ease;
+          opacity: 0;
+          transform: translateX(-50%) translateY(20px);
+          user-select: none;
+        `;
+        toast.innerText = '🕊️ 页面走丢了，点击回到首页 →';
+
+        // 鼠标悬停反馈
+        toast.addEventListener('mouseenter', function() {
+          this.style.background = 'rgba(255, 82, 82, 0.85)';
+          this.style.borderColor = 'rgba(255, 255, 255, 0.4)';
+        });
+        toast.addEventListener('mouseleave', function() {
+          this.style.background = 'rgba(0, 0, 0, 0.75)';
+          this.style.borderColor = 'rgba(255, 255, 255, 0.15)';
+        });
+
+        // 点击跳转到 index.html
+        toast.addEventListener('click', function() {
+          window.location.href = 'index.html';
+        });
+
+        document.body.appendChild(toast);
+
+        // 触发入场动画（淡入 + 上浮）
+        requestAnimationFrame(function() {
+          toast.style.opacity = '1';
+          toast.style.transform = 'translateX(-50%) translateY(0)';
+        });
+
+        // 30 秒后自动消失（淡出后移除）
+        var autoHideTimer = setTimeout(function() {
+          if (toast.parentNode) {
+            toast.style.opacity = '0';
+            toast.style.transform = 'translateX(-50%) translateY(20px)';
+            // 等待过渡结束后移除 DOM
+            setTimeout(function() {
+              if (toast.parentNode) toast.remove();
+            }, 500);
+          }
+        }, 30000);
+
+        // 点击 toast 跳转时清除定时器（但页面跳转后自动清理，无需手动）
+        toast.addEventListener('click', function() {
+          clearTimeout(autoHideTimer);
+        });
+
+      }, 3000); // 3 秒延迟
+    }
+  })();
+</script>
+<!-- ===================== Toast 结束 ===================== -->
+
+</body>
 </html>
-
-
